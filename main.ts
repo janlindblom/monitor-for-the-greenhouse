@@ -1,6 +1,8 @@
+// Switch mode
 input.onButtonPressed(Button.A, function () {
     master = !(master)
 })
+// Radio trigger on master
 radio.onReceivedValue(function (name, value) {
     if (master) {
         if (name == "temp") {
@@ -26,6 +28,7 @@ master = false
 radio.setGroup(42)
 temperature = 0
 light_level = 0
+// remote measure loop
 basic.forever(function () {
     if (!(master)) {
         servos.P0.setAngle(0)
@@ -38,6 +41,7 @@ basic.forever(function () {
     }
     basic.pause(1000)
 })
+// Master display loop
 basic.forever(function () {
     if (master) {
         whaleysans.showNumber(Math.abs(temperature))
